@@ -16,8 +16,13 @@
 // 5. After the Winner announcement, we may want to ask the user to play again or quit from the game.
 
 function rockPaperScissorsGame() {
-  const userChoice = prompt("Enter your choice: Rock, Paper, or Scissors");
-  console.log(userChoice);
+  const userChoicePrompt = prompt(
+    "Enter your choice: Rock, Paper, or Scissors",
+  );
+
+  const userChoice = userChoicePrompt.toLowerCase();
+
+  const computerChoice = Math.floor(Math.random() * 3) + 1;
 }
 
 rockPaperScissorsGame();
