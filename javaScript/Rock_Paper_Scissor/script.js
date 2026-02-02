@@ -31,6 +31,24 @@ function rockPaperScissorsGame() {
   } else {
     computerChoice = "scissors";
   }
+
+  if (
+    (userChoice === "rock" && computerChoice === "scissors") ||
+    (userChoice === "paper" && computerChoice === "rock") ||
+    (userChoice === "scissors" && computerChoice === "paper")
+  ) {
+    console.log("Yep! You win!");
+  } else if (
+    (userChoice === "scissors" && computerChoice === "rock") ||
+    (userChoice === "rock" && computerChoice === "paper") ||
+    (userChoice === "paper" && computerChoice === "scissors")
+  ) {
+    console.log("Computer wins!");
+  } else if (userChoice === computerChoice) {
+    console.log("It's a tie!");
+  } else {
+    console.log("Invalid input!");
+  }
 }
 
 rockPaperScissorsGame();
