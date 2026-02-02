@@ -22,11 +22,12 @@ function rockPaperScissorsGame() {
 
   const userChoice = userChoicePrompt.toLowerCase();
 
-  const computerChoice = Math.floor(Math.random() * 3) + 1;
+  let computerChoice;
+  const randomNumber = Math.floor(Math.random() * 3) + 1;
 
-  if (computerChoice === 1) {
+  if (randomNumber === 1) {
     computerChoice = "rock";
-  } else if (computerChoice === 2) {
+  } else if (randomNumber === 2) {
     computerChoice = "paper";
   } else {
     computerChoice = "scissors";
