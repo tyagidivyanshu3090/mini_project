@@ -33,6 +33,9 @@ function rockPaperScissorsGame() {
     computerChoice = "scissors";
   }
 
+  console.log("User Choice: " + userChoice);
+  console.log("Computer Choice: " + computerChoice);
+
   if (
     (userChoice === "rock" && computerChoice === "scissors") ||
     (userChoice === "paper" && computerChoice === "rock") ||
@@ -49,6 +52,18 @@ function rockPaperScissorsGame() {
     console.log("It's a tie!");
   } else {
     console.log("Invalid input!");
+  }
+
+  const playAgainPrompt = prompt("Do you want to play again? (yes/no)");
+
+  const playAgain = playAgainPrompt ? playAgainPrompt.toLowerCase() : "no";
+
+  console.log(playAgainPrompt);
+
+  if (playAgainPrompt === "yes") {
+    rockPaperScissorsGame();
+  } else {
+    console.log("Thank you for playing!");
   }
 }
 
