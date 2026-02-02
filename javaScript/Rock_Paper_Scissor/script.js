@@ -14,3 +14,10 @@
 // 3. We have to compare user and computer's choice
 // 4. We need to announce the winner.
 // 5. After the Winner announcement, we may want to ask the user to play again or quit from the game.
+
+function rockPaperScissorsGame() {
+  const userChoice = prompt("Enter your choice: Rock, Paper, or Scissors");
+  console.log(userChoice);
+}
+
+rockPaperScissorsGame();
