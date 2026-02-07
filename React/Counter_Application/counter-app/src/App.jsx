@@ -1,5 +1,5 @@
 import { useState } from "react";
-
+import Button from "./component/Button";
 import "./App.css";
 
 function App() {
@@ -14,24 +14,17 @@ function App() {
     <>
       <h1>Counter Application</h1>
       <p> Count: {count}</p>
-      <button
-        onClick={() => setCount(count + 1)}
-        style={{ color: "green", padding: "10px", margin: "10px" }}
-      >
+
+      <Button onClick={() => setCount(count + 1)} color="green">
         ➕ Increment
-      </button>
-      <button
-        onClick={decrement}
-        style={{ color: "red", padding: "10px", margin: "10px" }}
-      >
+      </Button>
+      <Button onClick={decrement} color="red">
         ➖ Decrement
-      </button>
-      <button
-        onClick={() => setCount(0)}
-        style={{ color: "blue", padding: "10px", margin: "10px" }}
-      >
+      </Button>
+      <Button onClick={() => setCount(0)} color="blue">
         🔄 Reset
-      </button>
+      </Button>
+
     </>
   );
 }
