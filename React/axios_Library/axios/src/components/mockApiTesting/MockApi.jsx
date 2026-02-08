@@ -8,6 +8,17 @@ const MockApi = () => {
     age: "",
   });
 
+  const handleChange = (e) => {
+    setFormDetails((prev) => {
+      return {
+        ...prev,
+        [e.target.name]: e.target.value,
+      };
+    });
+
+    // setFormDetails({...formDetails,[e.target.name]:e.target.value})
+  };
+
   const config = {
     baseURL: "https://6988bfcd780e8375a6891398.mockapi.io",
     url: "/user",
@@ -37,8 +48,12 @@ const MockApi = () => {
       <div>
         <h1>Form Details</h1>
         <form>
-          <input type="text" placeholder="Enter Name" />
-          <input type="number" placeholder="Enter Age" />
+          <input type="text" placeholder="Enter Name" onChange={handleChange} />
+          <input
+            type="number"
+            placeholder="Enter Age"
+            onChange={handleChange}
+          />
         </form>
       </div>
       <div>
