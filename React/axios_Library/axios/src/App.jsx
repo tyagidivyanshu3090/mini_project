@@ -8,13 +8,17 @@ function App() {
     baseURL: "https://jsonplaceholder.typicode.com",
     headers: {
       "Content-Type": "application/json",
-    },
+    }, 
     timeout: 1000,
   };
 
   async function fetchData() {
     const response = await axios(config);
-    console.log(response.data);
+    console.log("data", response.data);
+    console.log("status", response.status);
+    console.log("headers", response.headers);
+    console.log("config", response.config);
+    console.log("request", response.request);
   }
 
   return (
