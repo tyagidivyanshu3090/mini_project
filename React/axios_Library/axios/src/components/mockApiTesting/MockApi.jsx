@@ -3,6 +3,11 @@ import axios from "axios";
 
 const MockApi = () => {
   const [data, setData] = React.useState([]);
+  const [formDetails, setFormDetails] = React.useState({
+    name: "",
+    age: "",
+  });
+
   const config = {
     baseURL: "https://6988bfcd780e8375a6891398.mockapi.io",
     url: "/user",
@@ -29,6 +34,13 @@ const MockApi = () => {
 
   return (
     <>
+      <div>
+        <h1>Form Details</h1>
+        <form>
+          <input type="text" placeholder="Enter Name" />
+          <input type="number" placeholder="Enter Age" />
+        </form>
+      </div>
       <div>
         <h1>Mock Api Testing</h1>
         <button onClick={fetchData}>Fetch Data</button>
