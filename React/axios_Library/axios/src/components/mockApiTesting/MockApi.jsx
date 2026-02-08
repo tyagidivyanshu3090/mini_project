@@ -1,5 +1,6 @@
 import React from "react";
 import axios from "axios";
+import { useEffect } from "react";
 
 const MockApi = () => {
   const [data, setData] = React.useState([]);
@@ -38,7 +39,12 @@ const MockApi = () => {
       data: formDetails,
     });
     console.log(response.data);
+    fetchData();
   }
+
+  useEffect(() => {
+    fetchData();
+  }, []);
 
   return (
     <>
@@ -77,7 +83,6 @@ const MockApi = () => {
       </div>
       <div>
         <h1>Mock Api Testing</h1>
-        <button onClick={fetchData}>Fetch Data</button>
         <button onClick={postData}>Post Data</button>
       </div>
 
