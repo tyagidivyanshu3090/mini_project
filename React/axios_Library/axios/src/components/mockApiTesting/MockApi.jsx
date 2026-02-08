@@ -48,11 +48,19 @@ const MockApi = () => {
       <div>
         <h1>Form Details</h1>
         <form>
-          <input type="text" placeholder="Enter Name" onChange={handleChange} />
+          <input
+            type="text"
+            placeholder="Enter Name"
+            value={formDetails.name}
+            onChange={handleChange}
+            name="name"
+          />
           <input
             type="number"
             placeholder="Enter Age"
+            value={formDetails.age}
             onChange={handleChange}
+            name="age"
           />
         </form>
       </div>
