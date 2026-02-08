@@ -15,7 +15,17 @@ const MockApi = () => {
     setData(response.data);
   }
 
-  async function postData() {}
+  async function postData() {
+    const response = await axios({
+      method: "post",
+      url: "https://6988bfcd780e8375a6891398.mockapi.io/user",
+      data: {
+        name: "Divyanshu",
+        age: 20,
+      },
+    });
+    console.log(response.data);
+  }
 
   return (
     <>
