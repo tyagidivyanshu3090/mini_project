@@ -4,7 +4,8 @@ import axios from "axios";
 function App() {
   const config = {
     method: "get",
-    url: "https://jsonplaceholder.typicode.com/posts",
+    url: "/posts",
+    baseURL: "https://jsonplaceholder.typicode.com",
     headers: {
       "Content-Type": "application/json",
     },
