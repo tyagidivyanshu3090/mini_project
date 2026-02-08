@@ -35,10 +35,7 @@ const MockApi = () => {
     const response = await axios({
       method: "post",
       url: "https://6988bfcd780e8375a6891398.mockapi.io/user",
-      data: {
-        name: "Divyanshu",
-        age: 20,
-      },
+      data: formDetails,
     });
     console.log(response.data);
   }
@@ -54,6 +51,13 @@ const MockApi = () => {
             value={formDetails.name}
             onChange={handleChange}
             name="name"
+            style={{
+              margin: "10px",
+              padding: "10px",
+              border: "1px solid black",
+              borderRadius: "5px",
+              boxShadow: "0 0 10px rgba(0, 0, 0, 0.1)",
+            }}
           />
           <input
             type="number"
@@ -61,6 +65,13 @@ const MockApi = () => {
             value={formDetails.age}
             onChange={handleChange}
             name="age"
+            style={{
+              margin: "10px",
+              padding: "10px",
+              border: "1px solid black",
+              borderRadius: "5px",
+              boxShadow: "0 0 10px rgba(0, 0, 0, 0.1)",
+            }}
           />
         </form>
       </div>
