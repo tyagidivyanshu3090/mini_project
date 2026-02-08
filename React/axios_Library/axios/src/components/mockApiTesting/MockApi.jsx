@@ -33,13 +33,16 @@ const MockApi = () => {
   }
 
   async function postData() {
-    const response = await axios({
+    await axios({
       method: "post",
       url: "https://6988bfcd780e8375a6891398.mockapi.io/user",
       data: formDetails,
     });
-    console.log(response.data);
     fetchData();
+    setFormDetails({
+      name: "",
+      age: "",
+    });
   }
 
   useEffect(() => {
