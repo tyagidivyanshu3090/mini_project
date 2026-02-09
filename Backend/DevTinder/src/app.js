@@ -6,7 +6,8 @@ const app = express();
 const PORT = 3000;
 
 app.use("/", (req, res) => {
-  res.send("Welcome to life of backend");
+  // res.send("Welcome to life of backend");
+  res.status(200).json({ message: "Welcome to life of backend" });
 });
 
 app.listen(PORT, () => {
