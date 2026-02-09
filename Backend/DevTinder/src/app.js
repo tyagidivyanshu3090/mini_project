@@ -5,9 +5,20 @@ const app = express();
 
 const PORT = 3000;
 
-app.use("/", (req, res) => {
-  // res.send("Welcome to life of backend");
-  res.status(200).json({ message: "Welcome to life of backend" });
+// Route Handler for GET user: Getting the user
+app.get("/user", (req, res) => {
+  res.status(200).json({
+    name: "Divyanshu",
+    age: 21,
+    city: "Delhi",
+  });
+});
+
+// Route Handler for Post User: Creating the user
+app.post("/user", (req, res) => {
+  res.status(200).json({
+    message: "User created successfully",
+  });
 });
 
 app.listen(PORT, () => {
