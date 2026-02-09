@@ -21,6 +21,18 @@ app.post("/user", (req, res) => {
   });
 });
 
+// Route Handler for Delete User: Deleting the user
+// :id is the dynamic parameter -> query parameter
+// Api -> http://localhost:3000/user/:21
+app.delete("/user/:id", (req, res) => {
+  const { id } = req.params;
+  res.status(200).json({
+    message: `User with id ${id} deleted successfully`,
+  });
+});
+
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
+
+
