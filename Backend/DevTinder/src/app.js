@@ -14,6 +14,28 @@ app.get("/user", (req, res) => {
   });
 });
 
+// Handling multiple route handlers for a GET request
+app.get(
+  "/user/status",
+  (req, res, next) => {
+    // This function acts as a 'gatekeeper' or 'logger'.
+    console.log("Middleware executed: Checking conditions...");
+
+    // IMPORTANT: next() is called to pass control to the second function.
+    // If you remove next(), the request will hang and never reach the next handler.
+    next();
+  },
+
+  // 3. The Final Route Handler (Request Handler)
+  (req, res) => {
+    // This function is responsible for ending the request-response cycle.
+    // It sends the final data back to the client.
+    res.status(200).json({
+      message: "User status",
+    });
+  },
+);
+
 // Route Handler for Post User: Creating the user
 app.post("/user", (req, res) => {
   res.status(200).json({
@@ -34,5 +56,3 @@ app.delete("/user/:id", (req, res) => {
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
-
-
