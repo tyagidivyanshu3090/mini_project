@@ -6,6 +6,7 @@ const PORT = 3000;
 // Implementing the middleware using the app.use()
 const ADMIN_KEY = "xyz";
 
+// Middleware to check if the user is admin And if not then return error from here only
 app.use("/admin", (req, res, next) => {
   const { key } = req.query;
 
