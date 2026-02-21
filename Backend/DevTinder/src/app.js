@@ -4,12 +4,12 @@ const app = express();
 const PORT = 3000;
 
 // Implementing the middleware using the app.use()
-const KEY = "xyz";
+const ADMIN_KEY = "xyz";
 
-app.use((req, res, next) => {
+app.use("/admin", (req, res, next) => {
   const { key } = req.query;
 
-  if (key === KEY) {
+  if (key === ADMIN_KEY) {
     next();
   } else {
     res.status(401).json({
@@ -19,11 +19,17 @@ app.use((req, res, next) => {
 });
 
 // Implementing the route handler
-app.get("/user", (req, res) => {
+app.get("/admin/users", (req, res) => {
   res.status(200).json({
     name: "Divyanshu",
     age: 21,
     city: "Delhi",
+  });
+});
+
+app.delete("/admin/users", (req, res) => {
+  res.status(200).json({
+    message: "User deleted successfully",
   });
 });
 
