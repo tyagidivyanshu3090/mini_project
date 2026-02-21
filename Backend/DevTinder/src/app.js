@@ -1,23 +1,11 @@
 const express = require("express");
 const app = express();
+const adminAuth = require("./middleware/adminAuth");
 
 const PORT = 3000;
 
-// Implementing the middleware using the app.use()
-const ADMIN_KEY = "xyz";
-
-// Middleware to check if the user is admin And if not then return error from here only
-app.use("/admin", (req, res, next) => {
-  const { key } = req.query;
-
-  if (key === ADMIN_KEY) {
-    next();
-  } else {
-    res.status(401).json({
-      message: "Unauthorized",
-    });
-  }
-});
+// Calling the adminAuth for authentication of admin and then passing the request to the route handler
+app.use("/admin", adminAuth);
 
 // Implementing the route handler
 app.get("/admin/users", (req, res) => {
