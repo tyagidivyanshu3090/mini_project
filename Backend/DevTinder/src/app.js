@@ -1,7 +1,7 @@
 const express = require("express");
 const app = express();
 const adminAuth = require("./middleware/adminAuth");
-require("./config/database");
+const { connectDB } = require("./config/database");
 
 const PORT = 3000;
 
@@ -31,6 +31,8 @@ app.use("/", (err, req, res, next) => {
   });
 });
 
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
+connectDB().then(() => {
+  app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
+  });
 });
