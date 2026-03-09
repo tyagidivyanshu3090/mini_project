@@ -1,6 +1,7 @@
 const express = require("express");
 const app = express();
 const adminAuth = require("./middleware/adminAuth");
+require("./config/database");
 
 const PORT = 3000;
 
