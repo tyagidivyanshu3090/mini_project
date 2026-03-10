@@ -23,3 +23,8 @@ const userSchema = new mongoose.Schema({
     type: String,
   },
 });
+
+// Creating a model from the schema -> which is used for interacting with the database
+const userModel = mongoose.model("user", userSchema);
+
+module.exports = userModel;
