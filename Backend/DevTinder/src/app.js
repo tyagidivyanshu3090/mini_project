@@ -31,8 +31,15 @@ app.use("/", (err, req, res, next) => {
   });
 });
 
-connectDB().then(() => {
-  app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
-  });
-});
+const startServer = async () => {
+  try {
+    await connectDB();
+    app.listen(PORT, () => {
+      console.log(`Server is running on port ${PORT}`);
+    });
+  } catch (err) {
+    console.error("Database connection failed", err);
+  }
+};
+
+startServer();
