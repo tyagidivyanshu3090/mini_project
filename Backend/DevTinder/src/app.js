@@ -5,32 +5,6 @@ const { connectDB } = require("./config/database");
 
 const PORT = 3000;
 
-// Calling the adminAuth for authentication of admin and then passing the request to the route handler
-app.use("/admin", adminAuth);
-
-// Implementing the route handler
-app.get("/admin/users", (req, res) => {
-  res.status(200).json({
-    name: "Divyanshu",
-    age: 21,
-    city: "Delhi",
-  });
-});
-
-app.delete("/admin/users", (req, res) => {
-  res.status(200).json({
-    message: "User deleted successfully",
-  });
-});
-
-// Implementing the error handler
-app.use("/", (err, req, res, next) => {
-  console.log(err);
-  res.status(500).json({
-    message: "Internal server error",
-  });
-});
-
 const startServer = async () => {
   try {
     await connectDB();
