@@ -39,6 +39,22 @@ app.get("/all-user", async (req, res) => {
   }
 });
 
+app.get("/userbyemail", async (req, res) => {
+  try {
+    const email = req.query.email;
+    // Fetching the user from database by email
+    const users = await UserModel.find({ email: email });
+    // Sending the response to the client
+    if (users.length === 0) {
+      return res.status(404).json({ message: "User not found" });
+    }
+    res.status(200).json(users);
+    console.log(users);
+  } catch (err) {
+    res.status(500).send("Error fetching users");
+  }
+});
+
 const startServer = async () => {
   try {
     await connectDB();
