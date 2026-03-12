@@ -3,7 +3,7 @@
 const mongoose = require("mongoose");
 // It is best practice to store this in a .env file
 const mongoURI =
-  "mongodb+srv://devTinder:Divyanshu3090%40@cluster0.3wshelt.mongodb.net/devTinder";
+  "mongodb+srv://devTinder:Navjot3090@cluster0.3wshelt.mongodb.net/devTinder";
 
 const connectDB = async () => {
   try {
