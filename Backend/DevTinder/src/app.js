@@ -6,22 +6,21 @@ const UserModel = require("./models/user");
 
 const PORT = 3000;
 
+// Middleware to parse JSON request body for all the routes.
+app.use(express.json());
+
 // Creating the post Route handler to save data to database
 app.post("/signup", async (req, res) => {
-  // Creating the dummy data:
-  const userObject = {
-    firstName: "Divyanshu",
-    lastName: "Tyagi",
-    email: "divyanshu422@gmail.com",
-    password: "[PASSWORD]",
-    age: 29,
-    gender: "Male",
-  };
   try {
+    const { firstName, lastName, email, password, age, gender } = req.body;
+    const userObject = { firstName, lastName, email, password, age, gender };
+
     // Creating the instance of UserModel to save data to database with userObject
     const user = new UserModel(userObject);
+
     // Saving the data to database
     await user.save();
+
     // Sending the response to the client
     res.status(201).json({ message: "User created successfully" });
   } catch (err) {
