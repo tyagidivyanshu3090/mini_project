@@ -27,6 +27,18 @@ app.post("/signup", async (req, res) => {
   }
 });
 
+app.get("/all-user", async (req, res) => {
+  try {
+    // Fetching all the data from database
+    const users = await UserModel.find();
+    // Sending the response to the client
+    res.status(200).json(users);
+    console.log(users);
+  } catch (err) {
+    res.status(500).send("Error fetching users");
+  }
+});
+
 const startServer = async () => {
   try {
     await connectDB();
