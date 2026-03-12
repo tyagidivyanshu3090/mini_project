@@ -12,11 +12,9 @@ app.use(express.json());
 // Creating the post Route handler to save data to database
 app.post("/signup", async (req, res) => {
   try {
-    const { firstName, lastName, email, password, age, gender } = req.body;
-    const userObject = { firstName, lastName, email, password, age, gender };
-
     // Creating the instance of UserModel to save data to database with userObject
-    const user = new UserModel(userObject);
+    // req.body -> { firstName, lastName, email, password, age, gender }
+    const user = new UserModel(req.body);
 
     // Saving the data to database
     await user.save();
