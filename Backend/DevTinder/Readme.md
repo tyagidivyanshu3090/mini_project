@@ -22,3 +22,5 @@
 - `UserModel.deleteOne()` is a Model Method. It takes a "filter" object as an argument. It finds the first document that matches the filter and removes it permanently.
 
 - `UserModel.findOneAndDelete({ email: email })`: This method is used to find the user in the database by email and delete it. If there are 2 users with same email it will delete only one user.
+
+- `UserModel.findByIdAndUpdate(id, update, options)`: This method is used to find the user in the database by id and update it. 

@@ -69,6 +69,22 @@ app.delete("/deleteuser", async (req, res) => {
   }
 });
 
+app.patch("/updateuser", async (req, res) => {
+  try {
+    const userId = req.body.id;
+    const user = await UserModel.findByIdAndUpdate(userId, req.body, {
+      new: true,
+    });
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+    res.status(200).json({ message: "User updated successfully" });
+  } catch (err) {
+    console.error("Error updating user", err);
+    res.status(500).json("Error updating user");
+  }
+});
+
 const startServer = async () => {
   try {
     await connectDB();
