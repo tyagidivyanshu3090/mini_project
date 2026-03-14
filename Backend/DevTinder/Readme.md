@@ -9,4 +9,8 @@
 
 - `app.use(express.json())`: This method is used to parse the incoming requests with JSON payloads. It is used to handle requests with JSON payloads in the application.
 
-- `await UserModel.find()`: This method is used to find all the users in the database. It is used to handle requests with JSON payloads in the application. Basically this method is used to fetch all the data from the database.
+- `await UserModel.find({})`: This method is used to find all the users in the database.
+
+- `await UserModel.find({ email: email })`: This method is used to find the user in the database by email. If there are 2 users with same email it will return both the users.
+
+- `await UserModel.findOne({ email: email })`: This method is used to find the user in the database by email. 
