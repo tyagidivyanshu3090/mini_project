@@ -15,10 +15,8 @@ app.post("/signup", async (req, res) => {
     // Creating the instance of UserModel to save data to database with userObject
     // req.body -> { firstName, lastName, email, password, age, gender }
     const user = new UserModel(req.body);
-
     // Saving the data to database
-    await user.save();
-
+    await user.save(); 
     // Sending the response to the client
     res.status(201).json({ message: "User created successfully" });
   } catch (err) {

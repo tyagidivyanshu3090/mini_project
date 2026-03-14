@@ -13,4 +13,4 @@
 
 - `await UserModel.find({ email: email })`: This method is used to find the user in the database by email. If there are 2 users with same email it will return both the users.
 
-- `await UserModel.findOne({ email: email })`: This method is used to find the user in the database by email. 
+- `await UserModel.findOne({ email: email })`: This method is used to find the user in the database by email. If there are 2 users with same email it will return only one user.
