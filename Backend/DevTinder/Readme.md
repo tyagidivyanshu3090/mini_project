@@ -18,3 +18,7 @@
 - `await UserModel.deleteOne({ email: email })`: This method is used to delete the user from the database by email. If there are 2 users with same email it will delete only one user.
 
 - `await UserModel.findByIdAndDelete({ _id: id })`: This method is used to delete the user from the database by id. If there are 2 users with same id it will delete only one user.
+
+- `UserModel.deleteOne()` is a Model Method. It takes a "filter" object as an argument. It finds the first document that matches the filter and removes it permanently.
+
+- `UserModel.findOneAndDelete({ email: email })`: This method is used to find the user in the database by email and delete it. If there are 2 users with same email it will delete only one user.
