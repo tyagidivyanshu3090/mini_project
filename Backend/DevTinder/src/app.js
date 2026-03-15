@@ -21,7 +21,11 @@ app.post("/signup", async (req, res) => {
     res.status(201).json({ message: "User created successfully" });
   } catch (err) {
     console.error("Error creating user", err);
-    res.status(500).json({ message: "Error creating user" });
+    // res.status(500).json({ message: "Error creating user" });
+    // Status code is 400 because the error is due to the bad request from the client
+    res.status(400).json({
+      message: err.message,
+    });
   }
 });
 
