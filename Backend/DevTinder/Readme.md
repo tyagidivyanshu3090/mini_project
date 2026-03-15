@@ -5,6 +5,14 @@
 
 - `app.use()` : This method is used to mount a middleware function at a specific path in the application. It is used to handle requests and responses in the application.
 
+# Schema level validation
+
+- required: Ensures that the field is required.
+- unique: Ensures that no two users can have the same value for the field.
+- min: Defines the minimum value for the field.
+- default: Defines the default value for the field.
+
+
 # Some method:
 
 - `app.use(express.json())`: This method is used to parse the incoming requests with JSON payloads. It is used to handle requests with JSON payloads in the application.

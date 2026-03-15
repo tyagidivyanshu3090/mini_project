@@ -22,6 +22,18 @@ const userSchema = new mongoose.Schema({
   gender: {
     type: String,
   },
+  photoUrl: {
+    type: String,
+    default: "https://cdn-icons-png.flaticon.com/512/149/149071.png", // Default value for the photoUrl
+  },
+  about: {
+    type: String,
+    default: "To be updated",
+  },
+  skills: {
+    type: [String], // Array of strings
+    default: [],
+  },
 });
 
 // Creating a model from the schema -> which is used for interacting with the database
