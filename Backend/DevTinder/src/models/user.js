@@ -4,11 +4,15 @@ const userSchema = new mongoose.Schema({
   firstName: {
     type: String,
     required: true, // Mandatory field
+    minLength: 2,
+    trim: true,
   },
   lastName: String, // Defining the type of the variable directly
   email: {
     type: String,
     required: true,
+    lowercase: true,
+    trim: true,
     unique: true,
   },
   password: {

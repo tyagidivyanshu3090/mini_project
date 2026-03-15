@@ -9,9 +9,13 @@
 
 - required: Ensures that the field is required.
 - unique: Ensures that no two users can have the same value for the field.
-- min: Defines the minimum value for the field.
 - default: Defines the default value for the field.
-
+- lowercase: Converts the field to lowercase.
+- trim: Removes whitespace from both ends of a string.
+- minLength: Defines the minimum length of the field. **Mainly used for strings.**
+- maxLength: Defines the maximum length of the field. **Mainly used for strings.**
+- min: Defines the minimum value for the field. **Mainly used for numbers.**
+- max: Defines the maximum value for the field. **Mainly used for numbers.**
 
 # Some method:
 
