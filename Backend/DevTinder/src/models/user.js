@@ -5,9 +5,16 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true, // Mandatory field
     minLength: 2,
+    maxLength: 20,
     trim: true,
   },
-  lastName: String, // Defining the type of the variable directly
+  lastName: {
+    type: String,
+    required: true,
+    minLength: 2,
+    maxLength: 20,
+    trim: true,
+  },
   email: {
     type: String,
     required: true,
