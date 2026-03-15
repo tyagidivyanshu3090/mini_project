@@ -39,7 +39,10 @@ const userSchema = new mongoose.Schema({
     //     throw new Error("Invalid gender");
     //   }
     // },
-    enum: ["male", "female", "other"],
+    enum: {
+      values: ["male", "female", "other"], // enum is used to validate the value of the field. It is a list of allowed values.
+      message: "Invalid gender. {VALUE} is not supported.", // {VALUE} is a special Mongoose placeholder
+    },
   },
   photoUrl: {
     type: String,
