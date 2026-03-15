@@ -78,6 +78,7 @@ app.patch("/updateuser", async (req, res) => {
     const userId = req.body.id;
     const user = await UserModel.findByIdAndUpdate(userId, req.body, {
       new: true,
+      runValidators: true, // This will run the validators defined in the schema
     });
     if (!user) {
       return res.status(404).json({ message: "User not found" });
