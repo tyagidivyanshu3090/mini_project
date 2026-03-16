@@ -11,6 +11,13 @@
 - unique: Ensures that no two users can have the same value for the field.
 - default: Defines the default value for the field.
 - lowercase: Converts the field to lowercase.
+- uppercase: Converts the field to uppercase.
+- select: This will not be returned in the response. Hence it is not visible to the client. 
+
+```javascript
+ password: { type: String, required: true, select: false }
+```
+
 - trim: Removes whitespace from both ends of a string.
 - minLength: Defines the minimum length of the field. **Mainly used for strings.**
 - maxLength: Defines the maximum length of the field. **Mainly used for strings.**

@@ -49,7 +49,7 @@ const userSchema = new mongoose.Schema(
     photoUrl: {
       type: String,
       default: "https://cdn-icons-png.flaticon.com/512/149/149071.png", // Default value for the photoUrl
-    },
+    }, 
     about: {
       type: String,
       default: "To be updated",
