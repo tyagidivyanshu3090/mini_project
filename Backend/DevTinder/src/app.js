@@ -91,8 +91,23 @@ app.patch("/updateuser", async (req, res) => {
       return ALLOWED_UPDATE_FIELDS.includes(key);
     });
 
+    const unAllowedFields = Object.keys(data).filter((key) => {
+      return !ALLOWED_UPDATE_FIELDS.includes(key);
+    });
+
+    if (unAllowedFields.length > 0) {
+      return res
+        .status(400)
+        .json({ message: "Invalid update fields", error: unAllowedFields });
+    }
+
     if (!isUpdateAllowed) {
       return res.status(400).json({ message: "Invalid update fields" });
+    }
+    if (req.body.skills.length > 10) {
+      return res
+        .status(400)
+        .json({ message: "Skills cant be greater than 10" });
     }
 
     const user = await UserModel.findByIdAndUpdate(userId, req.body, {
