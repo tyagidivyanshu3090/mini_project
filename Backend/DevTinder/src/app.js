@@ -75,7 +75,26 @@ app.delete("/deleteuser", async (req, res) => {
 
 app.patch("/updateuser", async (req, res) => {
   try {
-    const userId = req.body.id;
+    const userId = req.query.id;
+    const data = req.body;
+    const ALLOWED_UPDATE_FIELDS = [
+      "firstName",
+      "lastName",
+      "age",
+      "gender",
+      "photoUrl",
+      "about",
+      "skills",
+    ];
+
+    const isUpdateAllowed = Object.keys(data).every((key) => {
+      return ALLOWED_UPDATE_FIELDS.includes(key);
+    });
+
+    if (!isUpdateAllowed) {
+      return res.status(400).json({ message: "Invalid update fields" });
+    }
+
     const user = await UserModel.findByIdAndUpdate(userId, req.body, {
       new: true,
       runValidators: true, // This will run the validators defined in the schema
