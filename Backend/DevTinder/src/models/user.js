@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const validator = require("validator");
 
 const userSchema = new mongoose.Schema(
   {
@@ -22,6 +23,13 @@ const userSchema = new mongoose.Schema(
       lowercase: true,
       trim: true,
       unique: true,
+      validate: {
+        validator: function (value) {
+          if (!validator.isEmail(value)) {
+            throw new Error("Invalid email address: " + value);
+          }
+        },
+      },
     },
     password: {
       type: String,
@@ -49,7 +57,7 @@ const userSchema = new mongoose.Schema(
     photoUrl: {
       type: String,
       default: "https://cdn-icons-png.flaticon.com/512/149/149071.png", // Default value for the photoUrl
-    }, 
+    },
     about: {
       type: String,
       default: "To be updated",
