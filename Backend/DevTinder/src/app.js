@@ -3,14 +3,14 @@ const app = express();
 const adminAuth = require("./middleware/adminAuth");
 const { connectDB } = require("./config/database");
 const UserModel = require("./models/user");
-
+const signUpValidation = require("../utils_Or_helper/validationFile/signUpValidator");
 const PORT = 3000;
 
 // Middleware to parse JSON request body for all the routes.
 app.use(express.json());
 
 // Creating the post Route handler to save data to database
-app.post("/signup", async (req, res) => {
+app.post("/signup", signUpValidation, async (req, res) => {
   try {
     // Creating the instance of UserModel to save data to database with userObject
     // req.body -> { firstName, lastName, email, password, age, gender }
