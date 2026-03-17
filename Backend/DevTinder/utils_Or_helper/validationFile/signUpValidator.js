@@ -12,11 +12,9 @@ const signUpValidation = (req, res, next) => {
   }
 
   if (!validate.isStrongPassword(password)) {
-    return res
-      .status(400)
-      .json({ message: "Password must be at least 6 characters long" });
+    return res.status(400).json({ message: "Password must be strong" });
   }
-  
+
   // Call next() to pass control to the route handler
   next();
 };

@@ -4,6 +4,8 @@ const adminAuth = require("./middleware/adminAuth");
 const { connectDB } = require("./config/database");
 const UserModel = require("./models/user");
 const signUpValidation = require("../utils_Or_helper/validationFile/signUpValidator");
+const bcrypt = require("bcrypt");
+
 const PORT = 3000;
 
 // Middleware to parse JSON request body for all the routes.
@@ -12,9 +14,16 @@ app.use(express.json());
 // Creating the post Route handler to save data to database
 app.post("/signup", signUpValidation, async (req, res) => {
   try {
+    const { firstName, lastName, email, password } = req.body;
+    // Hashing the password using bcrypt library
+    const hashedPassword = await bcrypt.hash(password, 10);
     // Creating the instance of UserModel to save data to database with userObject
-    // req.body -> { firstName, lastName, email, password, age, gender }
-    const user = new UserModel(req.body);
+    const user = new UserModel({
+      firstName,
+      lastName,
+      email,
+      password: hashedPassword,
+    });
     // Saving the data to database
     await user.save();
     // Sending the response to the client
