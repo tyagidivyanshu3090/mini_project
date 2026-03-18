@@ -3,8 +3,10 @@ const app = express();
 const adminAuth = require("./middleware/adminAuth");
 const { connectDB } = require("./config/database");
 const UserModel = require("./models/user");
+
 const bcrypt = require("bcrypt");
 const cookieParser = require("cookie-parser");
+const jwt = require("jsonwebtoken");
 
 const signUpValidation = require("../utils_Or_helper/validationFile/signUpValidator");
 const loginValidator = require("../utils_Or_helper/validationFile/loginValidator");
@@ -57,7 +59,11 @@ app.post("/login", loginValidator, async (req, res, next) => {
     if (!isPasswordValid) {
       return res.status(401).json({ message: "Invalid password" });
     }
-    res.cookie("token", "token");
+    // Creating the JWT token
+    const token = jwt.sign({ id: user._id }, "DevTinder@$3090", {
+      expiresIn: "1h",
+    });
+    res.cookie("token", token);
     res.status(200).json({ message: "User logged in successfully" });
   } catch (err) {
     console.error("Error logging in", err);
