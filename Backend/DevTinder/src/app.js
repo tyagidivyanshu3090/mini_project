@@ -22,7 +22,7 @@ app.use(cookieParser());
 // Creating the post Route handler to save data to database
 app.post("/signup", signUpValidation, async (req, res) => {
   try {
-    const { firstName, lastName, email, password } = req.body;
+    const { firstName, lastName, email, password, gender } = req.body;
     // Hashing the password using bcrypt library
     const hashedPassword = await bcrypt.hash(password, 10);
     // Creating the instance of UserModel to save data to database with userObject
@@ -30,6 +30,7 @@ app.post("/signup", signUpValidation, async (req, res) => {
       firstName,
       lastName,
       email,
+      gender,
       password: hashedPassword,
     });
     // Saving the data to database
@@ -73,11 +74,23 @@ app.post("/login", loginValidator, async (req, res, next) => {
 
 app.get("/all-user", async (req, res) => {
   try {
+    const cookie = req.cookies;
+    const { token } = cookie;
+    if (!token) {
+      return res.status(401).json({ message: "Unauthorized" });
+    }
+    // Validating the token
+    const decodedToken = jwt.verify(token, "DevTinder@$3090"); // returns the decoded value
+    const { id } = decodedToken; // destructuring the decoded id which is used to get the user
+    const user = await UserModel.findById(id);
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
     // Fetching all the data from database
     const users = await UserModel.find();
     // Sending the response to the client
     res.status(200).json(users);
-    console.log(users);
   } catch (err) {
     res.status(500).send("Error fetching users");
   }
