@@ -4,6 +4,7 @@ const adminAuth = require("./middleware/adminAuth");
 const { connectDB } = require("./config/database");
 const UserModel = require("./models/user");
 const bcrypt = require("bcrypt");
+const cookieParser = require("cookie-parser");
 
 const signUpValidation = require("../utils_Or_helper/validationFile/signUpValidator");
 const loginValidator = require("../utils_Or_helper/validationFile/loginValidator");
@@ -12,6 +13,9 @@ const PORT = 3000;
 
 // Middleware to parse JSON request body for all the routes.
 app.use(express.json());
+
+// Middleware to parse cookies for all the routes.
+app.use(cookieParser());
 
 // Creating the post Route handler to save data to database
 app.post("/signup", signUpValidation, async (req, res) => {
@@ -53,6 +57,7 @@ app.post("/login", loginValidator, async (req, res, next) => {
     if (!isPasswordValid) {
       return res.status(401).json({ message: "Invalid password" });
     }
+    res.cookie("token", "token");
     res.status(200).json({ message: "User logged in successfully" });
   } catch (err) {
     console.error("Error logging in", err);
