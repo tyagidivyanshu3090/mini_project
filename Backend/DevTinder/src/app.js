@@ -106,7 +106,6 @@ app.get("/userbyemail", async (req, res) => {
       return res.status(404).json({ message: "User not found" });
     }
     res.status(200).json(users);
-    console.log(users);
   } catch (err) {
     res.status(500).send("Error fetching users");
   }
@@ -116,7 +115,6 @@ app.delete("/deleteuser", async (req, res) => {
   try {
     const email = req.query.email;
     const userFind = await UserModel.findOne({ email: email });
-    console.log(userFind);
     if (userFind === null) {
       return res.status(404).json({ message: "User not found" });
     }
