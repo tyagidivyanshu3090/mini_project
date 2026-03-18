@@ -64,7 +64,7 @@ app.post("/login", loginValidator, async (req, res, next) => {
     const token = jwt.sign({ id: user._id }, "DevTinder@$3090", {
       expiresIn: "1h",
     });
-    res.cookie("token", token);
+    res.cookie("token", token, { maxAge: 3600000 }); // 1 hour in milliseconds
     res.status(200).json({ message: "User logged in successfully" });
   } catch (err) {
     console.error("Error logging in", err);
