@@ -70,6 +70,15 @@ const userSchema = new mongoose.Schema(
   { timestamps: true },
 );
 
+// Attaching the getJWT method to the userSchema -> which is used to generate the JWT token.
+// this keyword refers to the user object. Becoz of usage of this key we cant use arrow function here.
+userSchema.method.getJWT = function () {
+  const user = this;
+  return jwt.sign({ id: user._id }, "DevTinder@$3090", {
+    expiresIn: "1h",
+  });
+};
+
 // Creating a model from the schema -> which is used for interacting with the database
 const UserModel = mongoose.model("User", userSchema);
 

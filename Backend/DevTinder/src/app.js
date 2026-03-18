@@ -61,9 +61,7 @@ app.post("/login", loginValidator, async (req, res, next) => {
       return res.status(401).json({ message: "Invalid password" });
     }
     // Creating the JWT token
-    const token = jwt.sign({ id: user._id }, "DevTinder@$3090", {
-      expiresIn: "1h",
-    });
+    const token = user.getJWT();
     res.cookie("token", token, { maxAge: 3600000 }); // 1 hour in milliseconds
     res.status(200).json({ message: "User logged in successfully" });
   } catch (err) {
