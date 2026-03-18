@@ -59,3 +59,7 @@
 - `res.clearCookie("token")`: This method is used to clear the cookie from the response. It takes the cookie name as an argument. The cookie name is the JWT token.
 
 - `res.clearCookie("token")`: This method is used to clear the cookie from the response. It takes the cookie name as an argument. The cookie name is the JWT token.
+
+# Middleware
+
+- `authMiddleware`: This middleware is used to authenticate the user. It checks if the token is present in the request, verifies the token, and finds the user by the token.

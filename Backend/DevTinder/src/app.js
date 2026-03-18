@@ -9,6 +9,7 @@ const jwt = require("jsonwebtoken");
 
 const signUpValidation = require("../utils_Or_helper/validationFile/signUpValidator");
 const loginValidator = require("../utils_Or_helper/validationFile/loginValidator");
+const authMiddleware = require("./middleware/authMiddleware");
 
 const PORT = 3000;
 
@@ -71,21 +72,8 @@ app.post("/login", loginValidator, async (req, res, next) => {
   }
 });
 
-app.get("/all-user", async (req, res) => {
+app.get("/all-user", authMiddleware, async (req, res) => {
   try {
-    const cookie = req.cookies;
-    const { token } = cookie;
-    if (!token) {
-      return res.status(401).json({ message: "Unauthorized" });
-    }
-    // Validating the token
-    const decodedToken = jwt.verify(token, "DevTinder@$3090"); // returns the decoded value
-    const { id } = decodedToken; // destructuring the decoded id which is used to get the user
-    const user = await UserModel.findById(id);
-    if (!user) {
-      return res.status(404).json({ message: "User not found" });
-    }
-
     // Fetching all the data from database
     const users = await UserModel.find();
     // Sending the response to the client
