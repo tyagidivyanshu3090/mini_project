@@ -1,5 +1,7 @@
 const mongoose = require("mongoose");
 const validator = require("validator");
+const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
 
 const userSchema = new mongoose.Schema(
   {
@@ -72,11 +74,17 @@ const userSchema = new mongoose.Schema(
 
 // Attaching the getJWT method to the userSchema -> which is used to generate the JWT token.
 // this keyword refers to the user object. Becoz of usage of this key we cant use arrow function here.
-userSchema.method.getJWT = function () {
+userSchema.methods.getJWT = function () {
   const user = this;
   return jwt.sign({ id: user._id }, "DevTinder@$3090", {
     expiresIn: "1h",
   });
+};
+
+userSchema.methods.validatePassword = function (inputPassword) {
+  const user = this;
+  const hashedPassword = user.password;
+  return bcrypt.compare(inputPassword, hashedPassword);
 };
 
 // Creating a model from the schema -> which is used for interacting with the database

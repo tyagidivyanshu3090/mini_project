@@ -55,12 +55,13 @@ app.post("/login", loginValidator, async (req, res, next) => {
     if (!user) {
       return res.status(404).json({ message: "User not found" });
     }
-    const isPasswordValid = await bcrypt.compare(password, user.password);
+    // Checking if the password is valid using the method defined in the user schema
+    const isPasswordValid = await user.validatePassword(password);
 
     if (!isPasswordValid) {
       return res.status(401).json({ message: "Invalid password" });
     }
-    // Creating the JWT token
+    // Generating the JWT token using the method defined in the user schema
     const token = user.getJWT();
     res.cookie("token", token, { maxAge: 3600000 }); // 1 hour in milliseconds
     res.status(200).json({ message: "User logged in successfully" });
