@@ -6,7 +6,7 @@ const profileRouter = express.Router();
 const UserModel = require("../models/user");
 const authMiddleware = require("../middleware/authMiddleware");
 
-profileRouter.get("/userbyemail", authMiddleware, async (req, res) => {
+profileRouter.get("/view", authMiddleware, async (req, res) => {
   try {
     const email = req.query.email;
     // Fetching the user from database by email
