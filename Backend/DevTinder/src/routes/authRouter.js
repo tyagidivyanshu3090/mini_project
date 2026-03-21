@@ -61,7 +61,11 @@ authRouter.post("/login", loginValidator, async (req, res, next) => {
 
 authRouter.post("/logout", (req, res) => {
   try {
-    res.clearCookie("token"); // Clearing the token from the cookie -> as a result user will be logged out 
+    res.clearCookie("token"); // Clearing the token from the cookie -> as a result user will be logged out
+    // Other way of clearing the cookie
+    //1. res.cookie("token", "", { maxAge: 0 });
+    //2. res.cookie("token", "", { expires: new Date(0) });
+    //3. res.cookie("token", null, { expires: new Date(Date.now()) });  // Used by akshay saini 
     res.status(200).json({ message: "User logged out successfully" });
   } catch (err) {
     console.error("Error logging out", err);
