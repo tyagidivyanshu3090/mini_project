@@ -59,4 +59,14 @@ authRouter.post("/login", loginValidator, async (req, res, next) => {
   }
 });
 
+authRouter.post("/logout", (req, res) => {
+  try {
+    res.clearCookie("token"); // Clearing the token from the cookie -> as a result user will be logged out 
+    res.status(200).json({ message: "User logged out successfully" });
+  } catch (err) {
+    console.error("Error logging out", err);
+    res.status(400).json({ message: err.message });
+  }
+});
+
 module.exports = authRouter;
