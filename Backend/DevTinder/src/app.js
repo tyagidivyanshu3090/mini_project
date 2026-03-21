@@ -3,11 +3,7 @@ const app = express();
 const { connectDB } = require("./config/database");
 const UserModel = require("./models/user");
 
-const bcrypt = require("bcrypt");
 const cookieParser = require("cookie-parser");
-const jwt = require("jsonwebtoken");
-
-const authMiddleware = require("./middleware/authMiddleware");
 
 const authRouter = require("./routes/authRouter");
 const profileRouter = require("./routes/profileRouter");
@@ -22,20 +18,7 @@ app.use(cookieParser());
 
 // Creating the post Route handler to save data to database
 app.use("/auth", authRouter);
-
-//
 app.use("/profile", profileRouter);
-
-app.get("/all-user", authMiddleware, async (req, res) => {
-  try {
-    // Fetching all the data from database
-    const users = await UserModel.find();
-    // Sending the response to the client
-    res.status(200).json(users);
-  } catch (err) {
-    res.status(500).send("Error fetching users");
-  }
-});
 
 app.delete("/deleteuser", async (req, res) => {
   try {
