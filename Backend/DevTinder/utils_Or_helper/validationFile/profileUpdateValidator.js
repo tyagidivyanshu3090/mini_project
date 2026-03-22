@@ -20,6 +20,7 @@ const profileUpdateValidator = (req, res, next) => {
       .status(400)
       .json({ message: "Invalid update fields", error: unAllowedFields });
   }
+  req.body = updateData;
   next();
 };
 

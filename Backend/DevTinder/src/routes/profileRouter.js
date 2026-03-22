@@ -28,19 +28,13 @@ profileRouter.patch(
   profileUpdateValidator,
   async (req, res) => {
     try {
-      const { email, ...updateData } = req.body;
-      const user = await UserModel.findOne({ email });
-      if (!user) {
-        res.status(404).json({ message: "User not found" });
-      }
-      const updatedUser = await UserModel.findByIdAndUpdate(
-        user._id,
-        updateData,
-        {
-          new: true,
-          runValidators: true,
-        },
-      );
+      const loggedInUser = req.user; // getting user form the authMiddleware
+      const updateData = req.body; // getting update data from the profileUpdateValidator
+
+      Object.keys(updateData).forEach(
+        (key) => (loggedInUser[key] = updateData[key]),
+      ); // updating the user data
+      await loggedInUser.save(); // saving the user data. loggedInUser is the instance of UserModel
       res.status(200).json({ message: "User updated successfully" });
     } catch (err) {
       console.error("Error  updating user", err);
