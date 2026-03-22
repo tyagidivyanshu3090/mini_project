@@ -5,6 +5,7 @@ const profileRouter = express.Router();
 
 const UserModel = require("../models/user");
 const authMiddleware = require("../middleware/authMiddleware");
+const profileUpdateValidator = require("../../utils_Or_helper/validationFile/profileUpdateValidator");
 
 profileRouter.get("/view", authMiddleware, async (req, res) => {
   try {
@@ -21,27 +22,32 @@ profileRouter.get("/view", authMiddleware, async (req, res) => {
   }
 });
 
-profileRouter.patch("/update", authMiddleware, async (req, res) => {
-  try {
-    const { email, ...updateData } = req.body;
-    const user = await UserModel.findOne({ email });
-    if (!user) {
-      res.status(404).json({ message: "User not found" });
+profileRouter.patch(
+  "/update",
+  authMiddleware,
+  profileUpdateValidator,
+  async (req, res) => {
+    try {
+      const { email, ...updateData } = req.body;
+      const user = await UserModel.findOne({ email });
+      if (!user) {
+        res.status(404).json({ message: "User not found" });
+      }
+      const updatedUser = await UserModel.findByIdAndUpdate(
+        user._id,
+        updateData,
+        {
+          new: true,
+          runValidators: true,
+        },
+      );
+      res.status(200).json({ message: "User updated successfully" });
+    } catch (err) {
+      console.error("Error  updating user", err);
+      res.status(400).json({ message: err.message });
     }
-    const updatedUser = await UserModel.findByIdAndUpdate(
-      user._id,
-      updateData,
-      {
-        new: true,
-        runValidators: true,
-      },
-    );
-    res.status(200).json({ message: "User updated successfully" });
-  } catch (err) {
-    console.error("Error updating user", err);
-    res.status(400).json({ message: err.message });
-  }
-});
+  },
+);
 
 profileRouter.get("/all-user", authMiddleware, async (req, res) => {
   try {
