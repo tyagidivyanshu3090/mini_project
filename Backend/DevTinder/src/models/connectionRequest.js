@@ -15,13 +15,17 @@ const connectionRequest = new mongoose.Schema(
       required: true,
       enum: ["pending", "ignored", "accepted", "rejected"],
       default: "pending",
-      message: "Invalid status. {VALUE} is not supported.",
+      message: "Invalid status. {VALUE} is not supported.", 
     },
   },
   {
     timestamps: true,
   },
 );
+
+// ConnectionRequestModel: This is the model for the connection request. Used to interact with the database.
+// ConnectionRequest: This is the collection name in the database. it will be stored in small letters in the database.
+// connectionRequest: This is the schema for the connection request.
 
 const ConnectionRequestModel = mongoose.model(
   "ConnectionRequest",
