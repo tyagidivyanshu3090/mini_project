@@ -1,6 +1,6 @@
 // 1. with the usage of authmiddleware, we get the info of the user [ through token ]
-// 2. 3 corner cases: checking the toUser exist in db or not, checking whether connection already exist, checking the status is valid
- 
+// 2. 4 corner cases: checking the toUser exist in db or not, checking whether connection already exist, checking the status is valid, checking the fromUser is same as toUser
+
 const express = require("express");
 const connectionRouter = express.Router();
 
