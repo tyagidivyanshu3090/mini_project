@@ -5,6 +5,7 @@ const connectionRouter = express.Router();
 
 const ConnectionRequestModel = require("../models/connectionRequest");
 const authMiddleware = require("../middleware/authMiddleware");
+const UserModel = require("../models/user");
 
 connectionRouter.post(
   "/send/:status/:userId",
@@ -24,6 +25,12 @@ connectionRouter.post(
       const allowedStatus = ["interested", "ignored"];
       if (!allowedStatus.includes(status)) {
         return res.status(400).json({ message: "Invalid status" });
+      }
+
+      // Checking the toUser exist in db or not
+      const toUserExists = await UserModel.findById(toUser);
+      if (!toUserExists) {
+        return res.status(404).json({ message: "User not found" });
       }
 
       // checking whether connection already exist:
