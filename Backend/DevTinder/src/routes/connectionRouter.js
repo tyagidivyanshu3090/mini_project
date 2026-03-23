@@ -20,10 +20,21 @@ connectionRouter.post(
           .status(400)
           .json({ message: "You cannot send connection request to yourself" });
       }
-
+      // checking if the status is valid
       const allowedStatus = ["interested", "ignored"];
       if (!allowedStatus.includes(status)) {
         return res.status(400).json({ message: "Invalid status" });
+      }
+
+      // checking whether connection already exist
+      const existingConnection = await ConnectionRequestModel.findOne({
+        fromUser,
+        toUser,
+      });
+      if (existingConnection) {
+        return res
+          .status(400)
+          .json({ message: "Connection request already sent" });
       }
 
       // Creating the instance of ConnectionRequestModel
