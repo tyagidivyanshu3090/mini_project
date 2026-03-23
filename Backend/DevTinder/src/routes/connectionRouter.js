@@ -62,7 +62,12 @@ connectionRouter.post(
       });
     } catch (error) {
       console.error("Error sending connection request", error);
-      res.status(500).json({ message: "Error sending connection request" });
+      res
+        .status(500)
+        .json({
+          message: "Error sending connection request",
+          error: error.message,
+        });
     }
   },
 );
