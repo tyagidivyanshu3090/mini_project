@@ -15,6 +15,17 @@ connectionRouter.post(
       const toUser = req.params.userId;
       const status = req.params.status;
 
+      if (fromUser === toUser) {
+        return res
+          .status(400)
+          .json({ message: "You cannot send connection request to yourself" });
+      }
+
+      const allowedStatus = ["interested", "ignored"];
+      if (!allowedStatus.includes(status)) {
+        return res.status(400).json({ message: "Invalid status" });
+      }
+
       // Creating the instance of ConnectionRequestModel
       const connectionRequest = new ConnectionRequestModel({
         fromUser,
