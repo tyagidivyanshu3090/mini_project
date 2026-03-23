@@ -7,6 +7,7 @@ const cookieParser = require("cookie-parser");
 
 const authRouter = require("./routes/authRouter");
 const profileRouter = require("./routes/profileRouter");
+const connectionRouter = require("./routes/connectionRouter");
 
 const PORT = 3000;
 
@@ -19,8 +20,7 @@ app.use(cookieParser());
 // Creating the post Route handler to save data to database
 app.use("/auth", authRouter);
 app.use("/profile", profileRouter);
-
-
+app.use("/connection", connectionRouter);
 
 const startServer = async () => {
   try {

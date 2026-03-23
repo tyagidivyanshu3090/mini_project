@@ -1,0 +1,37 @@
+// 1. with the usage of authmiddleware, we get the info of the user [ through token ]
+
+const express = require("express");
+const connectionRouter = express.Router();
+
+const ConnectionRequestModel = require("../models/connectionRequest");
+const authMiddleware = require("../middleware/authMiddleware");
+
+connectionRouter.post(
+  "/send/:status/:userId",
+  authMiddleware,
+  async (req, res) => {
+    try {
+      const fromUser = req.user._id; // getting user from the authMiddleware
+      const toUser = req.params.userId;
+      const status = req.params.status;
+
+      // Creating the instance of ConnectionRequestModel
+      const connectionRequest = new ConnectionRequestModel({
+        fromUser,
+        toUser,
+        status,
+      });
+      // Saving the connection request in database
+      const savedConnectionRequest = await connectionRequest.save();
+      res.status(200).json({
+        message: "Connection request sent successfully",
+        savedConnectionRequest,
+      });
+    } catch (error) {
+      console.error("Error sending connection request", error);
+      res.status(500).json({ message: "Error sending connection request" });
+    }
+  },
+);
+
+module.exports = connectionRouter;
