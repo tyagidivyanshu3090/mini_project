@@ -26,10 +26,13 @@ connectionRouter.post(
         return res.status(400).json({ message: "Invalid status" });
       }
 
-      // checking whether connection already exist
+      // checking whether connection already exist:
+      // $or condition: checks if either of the condition is true [ either fromUser -> toUser or toUser -> fromUser ]
       const existingConnection = await ConnectionRequestModel.findOne({
-        fromUser,
-        toUser,
+        $or: [
+          { fromUser, toUser },
+          { fromUser: toUser, toUser: fromUser },
+        ],
       });
       if (existingConnection) {
         return res
