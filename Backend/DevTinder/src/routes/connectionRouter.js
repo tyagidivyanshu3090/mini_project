@@ -56,18 +56,23 @@ connectionRouter.post(
       });
       // Saving the connection request in database
       const savedConnectionRequest = await connectionRequest.save();
-      res.status(200).json({
-        message: "Connection request sent successfully",
-        savedConnectionRequest,
-      });
+      if (status === "interested") {
+        res.status(200).json({
+          message: "Connection request sent successfully",
+          savedConnectionRequest,
+        });
+      } else if (status === "ignored") {
+        res.status(200).json({
+          message: "Connection request ignored successfully",
+          savedConnectionRequest,
+        });
+      }
     } catch (error) {
       console.error("Error sending connection request", error);
-      res
-        .status(500)
-        .json({
-          message: "Error sending connection request",
-          error: error.message,
-        });
+      res.status(500).json({
+        message: "Error sending connection request",
+        error: error.message,
+      });
     }
   },
 );
